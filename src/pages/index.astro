@@ -72,7 +72,11 @@
         padding: 2rem;
         border-radius: 1rem;
         max-inline-size: 700px;
-        width: 100%;
+
+        @media (width > 800px) {
+          min-width: 700px;
+          width: 100%;
+        }
       }
 
       form {
