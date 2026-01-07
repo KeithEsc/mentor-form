@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Contact form</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      :root {
+        --green-light: hsl(148, 38%, 91%);
+        --green-dark: hsl(169, 82%, 27%);
+        --red: hsl(0, 66%, 54%);
+
+        --white: hsl(0, 0%, 100%);
+        --grey-light: hsl(186, 15%, 59%);
+        --grey-dark: hsl(187, 24%, 22%);
+      }
+
+      * {
+        margin: 0;
+        margin-block: 0;
+        box-sizing: border-box;
+      }
+
+      @font-face {
+        font-family: "Karla";
+        src: url("../assets/fonts/Karla-Italic-VariableFont_wght.ttf")
+          format("truetype");
+        font-weight: 400;
+        font-style: italic;
+      }
+
+      @font-face {
+        font-family: "Karla";
+        src: url("../assets/fonts/Karla-VariableFont_wght.ttf")
+          format("truetype");
+        font-weight: 100 900;
+        font-style: normal;
+      }
+
+      body {
+        background-color: var(--green-light);
+        font-family: "Karla", sans-serif;
+        line-height: 1.6;
+        font-size: 1rem;
+        accent-color: var(--green-dark);
+
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        padding: 1rem;
+      }
+
+      input,
+      button,
+      textarea {
+        font: inherit;
+      }
+
+      .form-wrapper {
+        background-color: var(--white);
+        padding: 2rem;
+        border-radius: 1rem;
+        max-inline-size: 700px;
+        width: 100%;
+      }
+
+      form {
+        display: grid;
+        gap: 1.25rem;
+
+        @media (width > 500px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .form-field,
+      .form-field-check {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .span-all {
+        grid-column: 1 / -1;
+      }
+
+      input,
+      textarea,
+      .form-field-radio {
+        border: 1px solid var(--grey-dark);
+        border-radius: 0.5rem;
+        padding: 0.75em 1em;
+
+        &:focus-visible {
+          outline-color: var(--green-dark);
+        }
+      }
+
+      textarea {
+        resize: block;
+      }
+
+      fieldset {
+        padding: 0;
+        border: 0;
+      }
+
+      .radio-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: inherit;
+
+        @media (width > 500px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* copied from Kevin Powell video. selecting fieldset legend and form-field labels (not radio)
+      and then using ::after to add in the "*" decoration. using flex display to control distance between label name and "*" */
+      fieldset:has([required]) legend,
+      .form-field:has(:not([type="radio"])[required]) label {
+        display: flex;
+        gap: 1ch;
+
+        &::after {
+          content: "*";
+          color: var(--green-dark);
+        }
+      }
+
+      /* align-items: flex-start is ensuring our checkbox stays at the top of the element
+      as our form gets smaller. eg: consent text line wraps to second line - instead of 
+      checkbox floating between the two lines it will now remain anchored to the top */
+      .form-field-consent,
+      .form-field-radio:has([type="radio"], [type="checkbox"]) {
+        display: flex;
+        gap: 1ch;
+        align-items: flex-start;
+      }
+
+      /* this helps with the positioning and size of the radio and checkbox inputs. allows us to make them larger, 
+      not have them shrink by previously used: align-items: flex-start on parent, and center them off with the text using margin-top  */
+      [type="radio"],
+      [type="checkbox"] {
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+        margin-top: 0.35em;
+      }
+
+      .form-field-radio:has([type="radio"]:checked) {
+        background-color: var(--green-light);
+        border-color: var(--green-dark);
+      }
+
+      /* this allows clicking anywhere in the input to activate the radio input */
+      .form-field-radio:has([type="radio"]) {
+        position: relative;
+
+        label::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+        }
+      }
+
+      button {
+        background: var(--green-dark);
+        color: var(--white);
+        border: 0;
+        padding: 0.75em 1.5em;
+        border-radius: 6px;
+
+        &:hover,
+        &:focus-visible {
+          background-color: var(--grey-dark);
+        }
+      }
+
+      input:user-invalid {
+        border-color: var(--red);
+      }
+
+      .error-message {
+        color: var(--red);
+      }
+      .error-message:empty {
+        display: none;
+      }
+
+      [type="checkbox"] {
+        margin-top: 0.275rem;
+      }
+
+      .toast {
+        position: fixed;
+        top: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(-20px);
+
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease;
+      }
+
+      .toast.show {
+        opacity: 1;
+        visibility: visible;
+        background-color: var(--grey-dark);
+        color: var(--white);
+        padding: 2rem;
+        border-radius: 1rem;
+      }
+
+      .toast-top {
+        display: flex;
+        gap: 1ch;
+        margin-bottom: 0.5em;
+      }
+    </style>
+    <script src="src/form.js" defer></script>
+  </head>
+  <body>
+    <div id="success-toast" class="toast" role="alert" aria-live="assertive">
+      <div class="toast-top">
+        <img src="src/assets/images/icon-success-check.svg" />
+        Message Sent!
+      </div>
+      <p>Thanks for completing the form. We'll be in touch soon!</p>
+    </div>
+    <div class="form-wrapper">
+      <h1>Contact Us</h1>
+      <form novalidate>
+        <div class="field-parent form-field">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="fname" required />
+          <span class="error-message" aria-live="polite"></span>
+        </div>
+        <div class="field-parent form-field">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lname" required />
+          <span class="error-message" aria-live="polite"></span>
+        </div>
+
+        <div class="field-parent form-field span-all">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            data-error="Please enter a valid email address"
+            id="email"
+            name="email"
+            required
+          />
+          <span class="error-message" aria-live="polite"></span>
+        </div>
+
+        <fieldset class="field-parent span-all form-field">
+          <legend>Query Type</legend>
+          <div class="radio-grid">
+            <div class="form-field-radio">
+              <input
+                type="radio"
+                id="general"
+                name="queryType"
+                value="general"
+                required
+              />
+              <label for="general">General Inquiry</label>
+            </div>
+
+            <div class="form-field-radio">
+              <input
+                type="radio"
+                id="support"
+                name="queryType"
+                value="support"
+                required
+              />
+              <label for="support">Support Request</label>
+            </div>
+          </div>
+          <span class="error-message" aria-live="polite"></span>
+        </fieldset>
+
+        <div class="field-parent form-field span-all">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="3" required></textarea>
+          <span class="error-message" aria-live="polite"></span>
+        </div>
+
+        <div class="field-parent form-field-check span-all">
+          <div class="form-field-consent">
+            <input
+              type="checkbox"
+              data-error="To submit this form, please consent to being contacted"
+              id="consent"
+              name="consent"
+              required
+            />
+            <label for="consent">I consent to being contacted by the team</label
+            >
+          </div>
+          <span class="error-message" aria-live="polite"></span>
+        </div>
+
+        <button type="submit" class="span-all">Submit</button>
+      </form>
+    </div>
+    <!-- 
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+      Coded by <a href="#">Your Name Here</a>.
+    </div>
+    -->
+  </body>
+</html>
