@@ -238,90 +238,93 @@
       </div>
       <p>Thanks for completing the form. We'll be in touch soon!</p>
     </div>
-    <div class="form-wrapper">
-      <h1>Contact Us</h1>
-      <form novalidate>
-        <div class="field-parent form-field">
-          <label for="fname">First Name</label>
-          <input type="text" id="fname" name="fname" required />
-          <span class="error-message" aria-live="polite"></span>
-        </div>
-        <div class="field-parent form-field">
-          <label for="lname">Last Name</label>
-          <input type="text" id="lname" name="lname" required />
-          <span class="error-message" aria-live="polite"></span>
-        </div>
-
-        <div class="field-parent form-field span-all">
-          <label for="email">Email Address</label>
-          <input
-            type="email"
-            data-error="Please enter a valid email address"
-            id="email"
-            name="email"
-            required
-          />
-          <span class="error-message" aria-live="polite"></span>
-        </div>
-
-        <fieldset class="field-parent span-all form-field">
-          <legend>Query Type</legend>
-          <div class="radio-grid">
-            <div class="form-field-radio">
-              <input
-                type="radio"
-                id="general"
-                name="queryType"
-                value="general"
-                required
-              />
-              <label for="general">General Inquiry</label>
-            </div>
-
-            <div class="form-field-radio">
-              <input
-                type="radio"
-                id="support"
-                name="queryType"
-                value="support"
-                required
-              />
-              <label for="support">Support Request</label>
-            </div>
+    <main>
+      <div class="form-wrapper">
+        <h1>Contact Us</h1>
+        <form novalidate>
+          <div class="field-parent form-field">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" required />
+            <span class="error-message" aria-live="polite"></span>
           </div>
-          <span class="error-message" aria-live="polite"></span>
-        </fieldset>
+          <div class="field-parent form-field">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" required />
+            <span class="error-message" aria-live="polite"></span>
+          </div>
 
-        <div class="field-parent form-field span-all">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="3" required></textarea>
-          <span class="error-message" aria-live="polite"></span>
-        </div>
-
-        <div class="field-parent form-field-check span-all">
-          <div class="form-field-consent">
+          <div class="field-parent form-field span-all">
+            <label for="email">Email Address</label>
             <input
-              type="checkbox"
-              data-error="To submit this form, please consent to being contacted"
-              id="consent"
-              name="consent"
+              type="email"
+              data-error="Please enter a valid email address"
+              id="email"
+              name="email"
               required
             />
-            <label for="consent">I consent to being contacted by the team</label
-            >
+            <span class="error-message" aria-live="polite"></span>
           </div>
-          <span class="error-message" aria-live="polite"></span>
-        </div>
 
-        <button type="submit" class="span-all">Submit</button>
-      </form>
-    </div>
-    <!-- 
+          <fieldset class="field-parent span-all form-field">
+            <legend>Query Type</legend>
+            <div class="radio-grid">
+              <div class="form-field-radio">
+                <input
+                  type="radio"
+                  id="general"
+                  name="queryType"
+                  value="general"
+                  required
+                />
+                <label for="general">General Inquiry</label>
+              </div>
+
+              <div class="form-field-radio">
+                <input
+                  type="radio"
+                  id="support"
+                  name="queryType"
+                  value="support"
+                  required
+                />
+                <label for="support">Support Request</label>
+              </div>
+            </div>
+            <span class="error-message" aria-live="polite"></span>
+          </fieldset>
+
+          <div class="field-parent form-field span-all">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="3" required></textarea>
+            <span class="error-message" aria-live="polite"></span>
+          </div>
+
+          <div class="field-parent form-field-check span-all">
+            <div class="form-field-consent">
+              <input
+                type="checkbox"
+                data-error="To submit this form, please consent to being contacted"
+                id="consent"
+                name="consent"
+                required
+              />
+              <label for="consent"
+                >I consent to being contacted by the team</label
+              >
+            </div>
+            <span class="error-message" aria-live="polite"></span>
+          </div>
+
+          <button type="submit" class="span-all">Submit</button>
+        </form>
+      </div>
+      <!-- 
     <div class="attribution">
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
       Coded by <a href="#">Your Name Here</a>.
     </div>
     -->
+    </main>
   </body>
 </html>
