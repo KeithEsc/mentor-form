@@ -54,11 +54,16 @@
         line-height: 1.6;
         font-size: 1rem;
         accent-color: var(--green-dark);
+        color: var(--grey-dark);
 
         display: grid;
         place-items: center;
         min-height: 100vh;
         padding: 1rem;
+      }
+
+      h1 {
+        margin-bottom: 1rem;
       }
 
       input,
@@ -81,7 +86,7 @@
 
       form {
         display: grid;
-        gap: 1.25rem;
+        gap: 1.5rem;
 
         @media (width > 500px) {
           grid-template-columns: repeat(2, 1fr);
@@ -101,7 +106,7 @@
       input,
       textarea,
       .form-field-radio {
-        border: 1px solid var(--grey-dark);
+        border: 1px solid var(--grey-light);
         border-radius: 0.5rem;
         padding: 0.75em 1em;
 
